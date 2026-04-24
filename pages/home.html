@@ -284,20 +284,9 @@
 
 <!-- HERO -->
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline preload="none" poster="../assets/images/tablegrill-steak-smoke.webp" data-src="../assets/video/grill-loop.mp4" aria-hidden="true"></video>
-  <script>
-    (function () {
-      if (window.matchMedia && window.matchMedia('(min-width: 769px)').matches) {
-        var v = document.querySelector('.hero-video');
-        if (!v) return;
-        var s = document.createElement('source');
-        s.src = v.dataset.src;
-        s.type = 'video/mp4';
-        v.appendChild(s);
-        v.load();
-      }
-    })();
-  </script>
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="../assets/images/tablegrill-steak-smoke.webp" aria-hidden="true">
+    <source src="../assets/video/grill-loop.mp4" type="video/mp4">
+  </video>
   <div class="hero-content">
     <div class="hero-eyebrow">Argentijns aan de gracht · sinds 2011</div>
     <h1 class="hero-title">De parrilla<br class="br-mobile-only"> staat aan</h1>

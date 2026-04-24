@@ -677,17 +677,13 @@ section {
   .hero { max-height: 820px; }
 }
 
-/* op mobile: korter + geen video (te zwaar voor LCP), show poster als bg */
+/* op mobile: korter zodat de video niet extreem gekropt wordt in portret-viewport */
 @media (max-width: 768px) {
   .hero {
     min-height: 65vh;
     max-height: none;
     padding-top: 80px;
-    background-image: url('../assets/images/tablegrill-steak-smoke.webp');
-    background-size: cover;
-    background-position: center;
   }
-  .hero-video { display: none; }
 }
 
 .hero-video {
