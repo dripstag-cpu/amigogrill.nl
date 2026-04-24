@@ -284,9 +284,28 @@
 
 <!-- HERO -->
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="../assets/images/tablegrill-steak-smoke.webp" aria-hidden="true">
-    <source src="../assets/video/grill-loop.mp4" type="video/mp4">
-  </video>
+  <video class="hero-video" autoplay muted loop playsinline preload="none" poster="../assets/images/tablegrill-steak-smoke.webp" data-src="../assets/video/grill-loop.mp4" aria-hidden="true"></video>
+  <script>
+    /* Lazy-load hero video source after LCP is done, so the poster
+       image wins LCP. Video autoplays when buffered. */
+    (function () {
+      var v = document.querySelector('.hero-video');
+      if (!v || !v.dataset.src) return;
+      function attach() {
+        if (v.querySelector('source')) return;
+        var s = document.createElement('source');
+        s.src = v.dataset.src;
+        s.type = 'video/mp4';
+        v.appendChild(s);
+        v.load();
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(attach, { timeout: 2000 });
+      } else {
+        window.addEventListener('load', function () { setTimeout(attach, 400); });
+      }
+    })();
+  </script>
   <div class="hero-content">
     <div class="hero-eyebrow">Argentijns aan de gracht · sinds 2011</div>
     <h1 class="hero-title">De parrilla<br class="br-mobile-only"> staat aan</h1>
@@ -639,43 +658,6 @@
   <a href="tel:+31208451081" class="dock-item">Bel</a>
   <a href="reserveren.html" class="dock-item dock-primary">Reserveer</a>
 </nav>
-
-<script>
-  // Header scroll state
-  const header = document.getElementById('siteHeader');
-
-  function onScroll() {
-    const y = window.scrollY;
-    if (y > 80) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  // Mobile menu toggle
-  const toggle = document.getElementById('mobileToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-  toggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
-  });
-  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    mobileMenu.classList.remove('open');
-    document.body.style.overflow = '';
-  }));
-
-  // Scroll reveals (slide from sides)
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { rootMargin: '-80px 0px -80px 0px' });
-  revealEls.forEach(el => io.observe(el));
-</script>
 
 </body>
 </html>
