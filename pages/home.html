@@ -51,9 +51,12 @@
 <!-- Preconnect + preload -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="../assets/video/grill-loop.mp4" fetchpriority="high">
 <link rel="preload" as="image" href="../assets/images/tablegrill-steak-smoke.webp" fetchpriority="high">
 <link rel="preload" as="style" href="shared.css">
+
+<!-- Fonts: async-load to avoid render-blocking -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800;9..144,900&family=Inter:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800;9..144,900&family=Inter:wght@400;500;600;700&display=swap"></noscript>
 
 <!-- Stylesheet -->
 <link rel="stylesheet" href="shared.css">
@@ -281,7 +284,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline poster="../assets/images/tablegrill-steak-smoke.webp">
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="../assets/images/tablegrill-steak-smoke.webp" aria-hidden="true">
     <source src="../assets/video/grill-loop.mp4" type="video/mp4">
   </video>
   <div class="hero-content">

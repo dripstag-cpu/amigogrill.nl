@@ -1,9 +1,8 @@
 /* ===========================================
    Amigo Grill — Shared Styles
    Design-tokens + componenten gebruikt over alle pagina's
+   Fonts are loaded via <link> in each HTML head (async) — not @import.
    =========================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=Permanent+Marker&display=swap');
 
 /* --- Design tokens --- */
 :root {
