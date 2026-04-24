@@ -1,0 +1,233 @@
+/* animations.css */
+/* @keyframes and reveal classes. Motion is gated on prefers-reduced-motion: no-preference. */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* Hero media switcher. Video plays, static fallback img is suppressed. */
+  .hero__media-fallback {
+    display: none;
+  }
+
+  /* Hero lockup entry. Headline lines slide in from opposite sides; eyebrow, lede, CTAs trail. */
+  @keyframes hero-lockup-slide-in-left {
+    0%   { opacity: 0; transform: translateX(-24px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes hero-lockup-slide-in-right {
+    0%   { opacity: 0; transform: translateX(24px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes hero-lockup-fade-up {
+    0%   { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes hero-media-in {
+    0%   { opacity: 0; transform: scale(1.04); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  /* Fade-up. 24px translateY + opacity for scroll-triggered text reveals. */
+  @keyframes fade-up {
+    0%   { opacity: 0; transform: translateY(24px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Clip-reveal. Image scroll reveal from bottom via clip-path inset. */
+  @keyframes clip-reveal {
+    0%   { clip-path: inset(100% 0 0 0); }
+    100% { clip-path: inset(0 0 0 0); }
+  }
+
+  /* Clip-reveal-left. Horizontal clip variant for quote and rule reveals. */
+  @keyframes clip-reveal-left {
+    0%   { opacity: 0; clip-path: inset(0 100% 0 0); }
+    100% { opacity: 1; clip-path: inset(0 0 0 0); }
+  }
+
+  /* Marquee-scroll. Continuous horizontal translation of duplicated content. */
+  @keyframes marquee-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Rule-expand. 80px orange rule grows from scaleX 0 to 1. */
+  @keyframes rule-expand {
+    0%   { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+  }
+
+  /* Fill-sweep. Primary button hover fill from left. */
+  @keyframes fill-sweep {
+    0%   { transform: translateX(-101%); }
+    100% { transform: translateX(0); }
+  }
+
+  /* Hero entry choreography. Applied when html.is-ready is set by motion.js on DOMContentLoaded. */
+  html.is-ready .hero__media {
+    animation: hero-media-in var(--duration-slow) var(--ease-out-expo) both;
+  }
+  html.is-ready .hero__title-line--1 {
+    animation: hero-lockup-slide-in-left 600ms var(--ease-out-expo) 300ms both;
+  }
+  html.is-ready .hero__title-line--2 {
+    animation: hero-lockup-slide-in-right 600ms var(--ease-out-expo) 300ms both;
+  }
+  html.is-ready .hero__eyebrow   { animation: hero-lockup-fade-up 400ms var(--ease-out-expo) 800ms both; }
+  html.is-ready .hero__lede      { animation: hero-lockup-fade-up 400ms var(--ease-out-expo) 880ms both; }
+  html.is-ready .hero__ctas      { animation: hero-lockup-fade-up 400ms var(--ease-out-expo) 960ms both; }
+  html.is-ready .hero__info      { animation: hero-lockup-fade-up 400ms var(--ease-out-expo) 1040ms both; }
+  html.is-ready .hero__rule      { animation: hero-lockup-fade-up 400ms var(--ease-out-expo) 760ms both; }
+
+  /* Scroll-reveal. .anim-on-scroll primed; IntersectionObserver adds .anim-in-view to trigger. */
+  .anim-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity var(--duration-slow) var(--ease-out-expo),
+      transform var(--duration-slow) var(--ease-out-expo);
+    will-change: opacity, transform;
+  }
+  .anim-on-scroll.anim-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Scroll-reveal image variant. Uses clip-path from bottom; no scale to avoid motion sickness. */
+  .anim-on-scroll--clip {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 700ms var(--ease-out-expo);
+    will-change: clip-path;
+  }
+  .anim-on-scroll--clip.anim-in-view {
+    clip-path: inset(0 0 0 0);
+  }
+
+  /* Scroll-reveal horizontal clip variant. Used on large review quotes. */
+  .anim-on-scroll--clip-left {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transform: translateY(24px);
+    transition:
+      opacity var(--duration-slow) var(--ease-out-expo),
+      transform var(--duration-slow) var(--ease-out-expo),
+      clip-path 700ms var(--ease-out-expo);
+    will-change: opacity, transform, clip-path;
+  }
+  .anim-on-scroll--clip-left.anim-in-view {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+
+  /* Scroll-reveal scaleX variant. Used for the 80px reservation CTA rule. */
+  .anim-on-scroll--scale-x {
+    opacity: 1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 480ms var(--ease-out-expo);
+    will-change: transform;
+  }
+  .anim-on-scroll--scale-x.anim-in-view {
+    transform: scaleX(1);
+  }
+
+  /* Stagger helpers. Apply to direct children of a .anim-on-scroll parent to cascade entries. */
+  .anim-stagger-1 { transition-delay: calc(var(--stagger-base) * 1); }
+  .anim-stagger-2 { transition-delay: calc(var(--stagger-base) * 2); }
+  .anim-stagger-3 { transition-delay: calc(var(--stagger-base) * 3); }
+  .anim-stagger-4 { transition-delay: calc(var(--stagger-base) * 4); }
+  .anim-stagger-5 { transition-delay: calc(var(--stagger-base) * 5); }
+  .anim-stagger-6 { transition-delay: calc(var(--stagger-base) * 6); }
+  .anim-stagger-7 { transition-delay: calc(var(--stagger-base) * 7); }
+  .anim-stagger-8 { transition-delay: calc(var(--stagger-base) * 8); }
+
+  /* Menu overlay entry. Categories stagger in from the left, close button drops in from top. */
+  .menu-overlay__item {
+    opacity: 0;
+    transform: translateX(-24px);
+    transition:
+      opacity var(--duration-slow) var(--ease-out-expo),
+      transform var(--duration-slow) var(--ease-out-expo);
+  }
+  .menu-overlay.is-open .menu-overlay__item {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .menu-overlay.is-open .menu-overlay__item:nth-child(1) { transition-delay: 180ms; }
+  .menu-overlay.is-open .menu-overlay__item:nth-child(2) { transition-delay: 260ms; }
+  .menu-overlay.is-open .menu-overlay__item:nth-child(3) { transition-delay: 340ms; }
+  .menu-overlay.is-open .menu-overlay__item:nth-child(4) { transition-delay: 420ms; }
+  .menu-overlay.is-open .menu-overlay__item:nth-child(5) { transition-delay: 500ms; }
+  .menu-overlay.is-open .menu-overlay__item:nth-child(6) { transition-delay: 580ms; }
+
+  .menu-overlay__close {
+    opacity: 0;
+    transform: translateY(-24px);
+    transition:
+      opacity var(--duration-slow) var(--ease-out-expo),
+      transform var(--duration-slow) var(--ease-out-expo);
+    transition-delay: 120ms;
+  }
+  .menu-overlay.is-open .menu-overlay__close {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Page transition. Parchment curtain slides up to cover, slides off on new page. */
+  .page-transition {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-transition);
+    background: var(--color-parchment);
+    transform: translateY(100%);
+    transition: transform var(--duration-slow) var(--ease-out-expo);
+    pointer-events: none;
+  }
+  .page-transition.is-covering {
+    transform: translateY(0);
+  }
+  .page-transition.is-leaving {
+    transform: translateY(-100%);
+  }
+}
+
+/* Reduced-motion. Collapse reveals to instant visible; disable loops, transitions, transforms. */
+@media (prefers-reduced-motion: reduce) {
+  .anim-on-scroll,
+  .anim-on-scroll--clip,
+  .anim-on-scroll--clip-left,
+  .anim-on-scroll--scale-x {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    transition: opacity var(--duration-fast) var(--ease-out-quart);
+  }
+  .marquee__track {
+    animation: none;
+    transform: none;
+  }
+  .menu-overlay__item,
+  .menu-overlay__close {
+    opacity: 1;
+    transform: none;
+    transition: opacity var(--duration-fast) var(--ease-out-quart);
+  }
+  .page-transition {
+    display: none;
+  }
+
+  /* Hero media switcher. Suppress the autoplaying video; the static poster-frame img stands in. */
+  .hero__media video {
+    display: none;
+  }
+  .hero__media-fallback {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

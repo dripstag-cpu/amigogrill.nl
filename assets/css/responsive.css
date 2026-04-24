@@ -1,0 +1,23 @@
+/* responsive.css */
+/* Phase 4 homepage breakpoints. Mobile-first overrides only. */
+
+@media (max-width: 1023px) {
+  .photo-grid { grid-template-columns: repeat(3, 1fr); }
+  .menu-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 767px) {
+  .hero { height: 85vh; min-height: 500px; }
+  .intro { padding: 4rem 1.5rem; }
+  .photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 1rem 3rem;
+  }
+  .menu-preview,
+  .reviews,
+  .contact-cta { padding: 4rem 1.5rem; }
+  .menu-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .reviews__grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .contact-cta__info { flex-direction: column; gap: 1.5rem; }
+}

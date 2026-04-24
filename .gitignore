@@ -1,0 +1,34 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.idea/
+.vscode/
+.claude/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies (if ever added)
+node_modules/
+.pnp.*
+
+# Build / deploy artefacts
+.vercel/
+.next/
+dist/
+build/
+*.tsbuildinfo
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Research / drafts — niet deployen
+research/
+research-prompt.md
+*-draft.md
