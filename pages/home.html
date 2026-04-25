@@ -51,7 +51,8 @@
 <!-- Preconnect + preload -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="../assets/images/tablegrill-steak-smoke.webp" fetchpriority="high">
+<link rel="preload" as="image" href="../assets/images/tablegrill-steak-smoke-mobile.webp" media="(max-width: 768px)" fetchpriority="high">
+<link rel="preload" as="image" href="../assets/images/tablegrill-steak-smoke.webp" media="(min-width: 769px)" fetchpriority="high">
 <link rel="preload" as="style" href="shared.css">
 
 <!-- Fonts: async-load to avoid render-blocking -->
@@ -240,7 +241,7 @@
 <header class="site-header" id="siteHeader">
   <div class="container site-header-inner">
     <a href="home.html" class="site-logo" aria-current="page">
-      <img src="../assets/images/logo-full.png" alt="Amigo Grill" width="240" height="162" loading="eager" decoding="async">
+      <img src="../assets/images/logo-full.webp" alt="Amigo Grill" width="208" height="140" loading="eager" decoding="async">
     </a>
 
     <nav class="site-nav">
@@ -284,9 +285,11 @@
 
 <!-- HERO -->
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="../assets/images/tablegrill-steak-smoke.webp" aria-hidden="true">
-    <source src="../assets/video/grill-loop.mp4" type="video/mp4">
-  </video>
+  <picture class="hero-poster" aria-hidden="true">
+    <source media="(max-width: 768px)" srcset="../assets/images/tablegrill-steak-smoke-mobile.webp" width="600" height="800">
+    <img src="../assets/images/tablegrill-steak-smoke.webp" alt="" width="900" height="1200" fetchpriority="high" decoding="async">
+  </picture>
+  <video class="hero-video" muted loop playsinline preload="none" data-src="../assets/video/grill-loop.mp4" aria-hidden="true"></video>
   <div class="hero-content">
     <div class="hero-eyebrow">Argentijns aan de gracht · sinds 2011</div>
     <h1 class="hero-title">De parrilla<br class="br-mobile-only"> staat aan</h1>
@@ -410,7 +413,7 @@
   <span class="terrace-bg-word" aria-hidden="true">Terras</span>
   <div class="terrace-grid">
     <div class="terrace-image reveal reveal-left">
-      <img src="../assets/images/westerkerk-view.webp" alt="Zicht op de Westerkerk vanaf het terras van Amigo Grill aan de Prinsengracht">
+      <img src="../assets/images/westerkerk-view.webp" alt="Zicht op de Westerkerk vanaf het terras van Amigo Grill aan de Prinsengracht" width="800" height="1219" loading="lazy" decoding="async">
       <span class="terrace-image-caption">Westerkerk · vanaf tafel 3</span>
     </div>
     <div class="terrace-text reveal reveal-right reveal-delay-1">
@@ -426,7 +429,7 @@
         <p class="terrace-footnote">Terrastafels reserveren we telefonisch, zodat we je aan het water kunnen plaatsen.</p>
 
         <figure class="terrace-image-secondary" aria-hidden="true">
-          <img src="../assets/images/terras-gracht-wijnglas.webp" alt="">
+          <img src="../assets/images/terras-gracht-wijnglas.webp" alt="" width="765" height="1020" loading="lazy" decoding="async">
         </figure>
       </div>
     </div>
@@ -438,8 +441,8 @@
   <div class="container">
     <div class="groups-grid">
       <div class="groups-images reveal reveal-left">
-        <img src="../assets/images/groep-diner-parrillada.webp" alt="Groep rond de parrilla bij Amigo Grill">
-        <img src="../assets/images/groep-voetbal-zaal.webp" alt="Privé-zaal met scherm voor bedrijfsuitjes">
+        <img src="../assets/images/groep-diner-parrillada.webp" alt="Groep rond de parrilla bij Amigo Grill" width="620" height="826" loading="lazy" decoding="async">
+        <img src="../assets/images/groep-voetbal-zaal.webp" alt="Privé-zaal met scherm voor bedrijfsuitjes" width="620" height="465" loading="lazy" decoding="async">
       </div>
       <div class="reveal reveal-right reveal-delay-1">
         <div class="eyebrow eyebrow-ember" style="margin-bottom: var(--space-3)">Bedrijfsuitjes</div>
@@ -642,5 +645,28 @@
 
 <script src="../assets/js/motion.js" defer></script>
 <script src="../assets/js/main.js" defer></script>
+<script>
+  /* Lazy-attach hero video source after LCP, fade in on first frame */
+  (function () {
+    var v = document.querySelector('.hero-video');
+    if (!v || !v.dataset.src) return;
+    function attach() {
+      if (v.querySelector('source')) return;
+      var s = document.createElement('source');
+      s.src = v.dataset.src;
+      s.type = 'video/mp4';
+      v.appendChild(s);
+      v.load();
+      v.addEventListener('playing', function () { v.classList.add('is-playing'); }, { once: true });
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(attach, { timeout: 2000 });
+    } else {
+      window.addEventListener('load', function () { setTimeout(attach, 400); });
+    }
+  })();
+</script>
 </body>
 </html>

@@ -35,16 +35,6 @@
         var items = document.querySelectorAll('.reveal');
         if (!items.length) { return; }
 
-        // Elements already in viewport on load: reveal them immediately (no wait for scroll)
-        function revealIfVisible(el) {
-            var r = el.getBoundingClientRect();
-            if (r.top < window.innerHeight && r.bottom > 0) {
-                el.classList.add('visible');
-                return true;
-            }
-            return false;
-        }
-
         if (!('IntersectionObserver' in window)) {
             items.forEach(function (el) { el.classList.add('visible'); });
             return;
@@ -59,15 +49,25 @@
             });
         }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
 
-        items.forEach(function (el) {
-            // First-paint sweep: anything already in viewport gets shown right away
-            if (revealIfVisible(el)) return;
-            io.observe(el);
-        });
+        // Batch: read all rects first (one layout flush), then write classes.
+        // Avoids layout thrashing from interleaved read/writes.
+        var vh = window.innerHeight;
+        var initiallyVisible = [];
+        var pending = [];
+        for (var i = 0; i < items.length; i++) {
+            var r = items[i].getBoundingClientRect();
+            if (r.top < vh && r.bottom > 0) initiallyVisible.push(items[i]);
+            else pending.push(items[i]);
+        }
+        for (var j = 0; j < initiallyVisible.length; j++) {
+            initiallyVisible[j].classList.add('visible');
+        }
+        for (var k = 0; k < pending.length; k++) {
+            io.observe(pending[k]);
+        }
 
         // Safety net: if observer somehow doesn't fire within 1.5s,
-        // force every remaining .reveal element visible. Prevents the
-        // "all content invisible on mobile" failure mode.
+        // force every remaining .reveal element visible.
         setTimeout(function () {
             document.querySelectorAll('.reveal:not(.visible)').forEach(function (el) {
                 el.classList.add('visible');
