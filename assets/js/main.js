@@ -40,6 +40,9 @@
             return;
         }
 
+        // IntersectionObserver fires synchronously for elements already in viewport
+        // on the next microtask after observe(). No need for a manual sweep —
+        // that caused 99ms of layout thrashing.
         var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
@@ -49,22 +52,7 @@
             });
         }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
 
-        // Batch: read all rects first (one layout flush), then write classes.
-        // Avoids layout thrashing from interleaved read/writes.
-        var vh = window.innerHeight;
-        var initiallyVisible = [];
-        var pending = [];
-        for (var i = 0; i < items.length; i++) {
-            var r = items[i].getBoundingClientRect();
-            if (r.top < vh && r.bottom > 0) initiallyVisible.push(items[i]);
-            else pending.push(items[i]);
-        }
-        for (var j = 0; j < initiallyVisible.length; j++) {
-            initiallyVisible[j].classList.add('visible');
-        }
-        for (var k = 0; k < pending.length; k++) {
-            io.observe(pending[k]);
-        }
+        items.forEach(function (el) { io.observe(el); });
 
         // Safety net: if observer somehow doesn't fire within 1.5s,
         // force every remaining .reveal element visible.
