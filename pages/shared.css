@@ -851,12 +851,12 @@ section {
 
 .signature-bg-word {
   position: absolute;
-  right: -3vw;
-  top: 6%;
+  right: -4vw;
+  top: 4%;
   z-index: 0;
   font-family: 'Fraunces', serif;
   font-weight: 900;
-  font-size: clamp(200px, 28vw, 460px);
+  font-size: clamp(140px, 26vw, 440px);
   line-height: 0.8;
   letter-spacing: -0.04em;
   color: #3A2F25;
@@ -865,10 +865,6 @@ section {
   user-select: none;
   white-space: nowrap;
   text-transform: uppercase;
-}
-
-@media (max-width: 768px) {
-  .signature-bg-word { font-size: clamp(120px, 36vw, 200px); right: -8vw; top: 2%; opacity: 0.5; }
 }
 
 .signature-grid {
@@ -880,10 +876,19 @@ section {
   max-height: 720px;
   max-width: 1600px;
   margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+@media (min-width: 768px) {
+  .signature-grid { padding: 0 48px; }
+}
+
+@media (min-width: 1280px) {
+  .signature-grid { padding: 0 64px; }
 }
 
 @media (max-width: 768px) {
-  .signature-grid { grid-template-columns: 1fr; max-height: none; padding: 0 var(--gutter); }
+  .signature-grid { grid-template-columns: 1fr; max-height: none; }
   .signature-image { border-radius: 6px; }
 }
 
@@ -1100,12 +1105,12 @@ section {
 
 .terrace-bg-word {
   position: absolute;
-  left: -2vw;
-  top: 8%;
+  left: -3vw;
+  top: 4%;
   z-index: 0;
   font-family: 'Fraunces', serif;
   font-weight: 900;
-  font-size: clamp(200px, 28vw, 460px);
+  font-size: clamp(140px, 26vw, 440px);
   line-height: 0.8;
   letter-spacing: -0.04em;
   color: #3A2F25;
@@ -1123,6 +1128,15 @@ section {
   grid-template-columns: 5fr 7fr;
   max-width: 1600px;
   margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+@media (min-width: 768px) {
+  .terrace-grid { padding: 0 48px; }
+}
+
+@media (min-width: 1280px) {
+  .terrace-grid { padding: 0 64px; }
 }
 
 .terrace-image {
@@ -1260,7 +1274,7 @@ section {
   display: block;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1279px) {
   .terrace-image-secondary { display: none; }
 }
 
@@ -1279,8 +1293,6 @@ section {
     padding: var(--space-6) 0 var(--space-8);
   }
   .terrace-meta { grid-template-columns: 1fr; gap: var(--space-3); max-width: none; }
-  .terrace-bg-word { font-size: clamp(120px, 36vw, 200px); left: -8vw; top: 4%; opacity: 0.5; }
-  .terrace-grid { padding: 0 var(--gutter); }
   .terrace-image { border-radius: 6px; }
 }
 
