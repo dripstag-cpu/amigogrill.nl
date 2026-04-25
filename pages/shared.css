@@ -275,6 +275,12 @@ section {
   width: auto;
 }
 
+/* Logo swap: full bull+text logo on transparent header,
+   simplified AMIGO-only on dark scrolled state */
+.site-logo-scrolled { display: none; }
+.site-header.scrolled .site-logo-default { display: none; }
+.site-header.scrolled .site-logo-scrolled { display: block; }
+
 .site-nav {
   display: none;
 }
