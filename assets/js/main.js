@@ -35,12 +35,21 @@
         var items = document.querySelectorAll('.reveal');
         if (!items.length) { return; }
 
+        // Elements already in viewport on load: reveal them immediately (no wait for scroll)
+        function revealIfVisible(el) {
+            var r = el.getBoundingClientRect();
+            if (r.top < window.innerHeight && r.bottom > 0) {
+                el.classList.add('visible');
+                return true;
+            }
+            return false;
+        }
+
         if (!('IntersectionObserver' in window)) {
             items.forEach(function (el) { el.classList.add('visible'); });
             return;
         }
 
-        // Elements already in view on load should reveal immediately without waiting for scroll.
         var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
@@ -50,7 +59,20 @@
             });
         }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
 
-        items.forEach(function (el) { io.observe(el); });
+        items.forEach(function (el) {
+            // First-paint sweep: anything already in viewport gets shown right away
+            if (revealIfVisible(el)) return;
+            io.observe(el);
+        });
+
+        // Safety net: if observer somehow doesn't fire within 1.5s,
+        // force every remaining .reveal element visible. Prevents the
+        // "all content invisible on mobile" failure mode.
+        setTimeout(function () {
+            document.querySelectorAll('.reveal:not(.visible)').forEach(function (el) {
+                el.classList.add('visible');
+            });
+        }, 1500);
     }
 
     /* ----------------------------------------------------------------

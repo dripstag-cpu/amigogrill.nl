@@ -51,7 +51,8 @@
 <!-- Preconnect + preload -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="../assets/images/tablegrill-steak-smoke.webp" fetchpriority="high">
+<link rel="preload" as="image" href="../assets/images/tablegrill-steak-smoke-mobile.webp" media="(max-width: 768px)" fetchpriority="high">
+<link rel="preload" as="image" href="../assets/images/tablegrill-steak-smoke.webp" media="(min-width: 769px)" fetchpriority="high">
 <link rel="preload" as="style" href="shared.css">
 
 <!-- Fonts: async-load to avoid render-blocking -->
@@ -240,7 +241,7 @@
 <header class="site-header" id="siteHeader">
   <div class="container site-header-inner">
     <a href="home.html" class="site-logo" aria-current="page">
-      <img src="../assets/images/logo-full.png" alt="Amigo Grill">
+      <img src="../assets/images/logo-full.png" alt="Amigo Grill" width="240" height="162" loading="eager" decoding="async">
     </a>
 
     <nav class="site-nav">
@@ -284,7 +285,12 @@
 
 <!-- HERO -->
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline preload="none" poster="../assets/images/tablegrill-steak-smoke.webp" data-src="../assets/video/grill-loop.mp4" aria-hidden="true"></video>
+  <picture class="hero-poster">
+    <source media="(max-width: 768px)" srcset="../assets/images/tablegrill-steak-smoke-mobile.webp" width="600" height="800">
+    <source media="(min-width: 769px)" srcset="../assets/images/tablegrill-steak-smoke.webp" width="900" height="1200">
+    <img src="../assets/images/tablegrill-steak-smoke.webp" alt="Tafelgrill met Argentijnse steak en houtskool-rook" width="900" height="1200" fetchpriority="high" decoding="async">
+  </picture>
+  <video class="hero-video" autoplay muted loop playsinline preload="none" data-src="../assets/video/grill-loop.mp4" aria-hidden="true"></video>
   <script>
     /* Lazy-load hero video source after LCP is done, so the poster
        image wins LCP. Video autoplays when buffered. */
@@ -298,6 +304,10 @@
         s.type = 'video/mp4';
         v.appendChild(s);
         v.load();
+        // Once video has enough data to play, mark hero so we can fade poster out
+        v.addEventListener('playing', function () {
+          v.classList.add('is-playing');
+        }, { once: true });
       }
       if ('requestIdleCallback' in window) {
         requestIdleCallback(attach, { timeout: 2000 });
