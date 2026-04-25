@@ -253,6 +253,32 @@
     }
 
     /* ----------------------------------------------------------------
+       Mobile dock — slide up after user scrolls past hero
+    ---------------------------------------------------------------- */
+    function initMobileDock() {
+        var dock = document.querySelector('.mobile-dock');
+        if (!dock) { return; }
+
+        var threshold = 300;
+        var ticking = false;
+
+        function update() {
+            if (window.scrollY > threshold) dock.classList.add('is-visible');
+            else dock.classList.remove('is-visible');
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function () {
+            if (!ticking) {
+                window.requestAnimationFrame(update);
+                ticking = true;
+            }
+        }, { passive: true });
+
+        update();
+    }
+
+    /* ----------------------------------------------------------------
        Init
     ---------------------------------------------------------------- */
     function ready(fn) {
@@ -265,6 +291,7 @@
         initReveal();
         initStickyHeader();
         initMobileNav();
+        initMobileDock();
         initFlagSwitcher();
         initLangBanner();
         docEl.classList.remove('no-js');

@@ -402,12 +402,12 @@ section {
   line-height: 1.8;
 }
 
-/* Mobile floating dock */
+/* Mobile floating dock — hidden until user scrolls past hero */
 .mobile-dock {
   position: fixed;
   bottom: 16px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(150%);
   background: rgba(14,11,9,0.96);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -419,6 +419,13 @@ section {
   z-index: 50;
   border: 1px solid var(--smoke-700);
   box-shadow: var(--shadow-md);
+  transition: transform 350ms var(--ease-out);
+  pointer-events: none;
+}
+
+.mobile-dock.is-visible {
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
 }
 
 @media (min-width: 1024px) {
@@ -714,7 +721,7 @@ section {
 /* op mobile: korter zodat de video niet extreem gekropt wordt in portret-viewport */
 @media (max-width: 768px) {
   .hero {
-    min-height: 65vh;
+    min-height: 75vh;
     max-height: none;
     padding-top: 80px;
   }
@@ -861,7 +868,7 @@ section {
 }
 
 @media (max-width: 768px) {
-  .signature-bg-word { font-size: 140px; right: -10vw; top: 2%; opacity: 0.5; }
+  .signature-bg-word { font-size: clamp(120px, 36vw, 200px); right: -8vw; top: 2%; opacity: 0.5; }
 }
 
 .signature-grid {
@@ -876,7 +883,8 @@ section {
 }
 
 @media (max-width: 768px) {
-  .signature-grid { grid-template-columns: 1fr; max-height: none; }
+  .signature-grid { grid-template-columns: 1fr; max-height: none; padding: 0 var(--gutter); }
+  .signature-image { border-radius: 6px; }
 }
 
 .signature-image {
@@ -1271,7 +1279,9 @@ section {
     padding: var(--space-6) 0 var(--space-8);
   }
   .terrace-meta { grid-template-columns: 1fr; gap: var(--space-3); max-width: none; }
-  .terrace-bg-word { font-size: 140px; right: -10vw; bottom: 2%; opacity: 0.5; }
+  .terrace-bg-word { font-size: clamp(120px, 36vw, 200px); left: -8vw; top: 4%; opacity: 0.5; }
+  .terrace-grid { padding: 0 var(--gutter); }
+  .terrace-image { border-radius: 6px; }
 }
 
 /* Responsive line-break utility: hide on tablet+ */
