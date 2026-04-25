@@ -924,7 +924,11 @@ section {
 }
 
 @media (max-width: 768px) {
-  .signature-grid { grid-template-columns: 1fr; max-height: none; }
+  .signature-grid {
+    grid-template-columns: 1fr;
+    max-height: none;
+    padding: var(--space-7) var(--gutter) 0;
+  }
   .signature-image { border-radius: 6px; }
 }
 
