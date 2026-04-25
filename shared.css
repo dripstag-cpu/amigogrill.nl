@@ -208,6 +208,20 @@ section {
 }
 .btn-primary:active { transform: scale(0.98); }
 
+.btn-stack {
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  line-height: 1.2;
+}
+.btn-stack .btn-sub {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  opacity: 0.92;
+}
+
 .btn-secondary {
   background: transparent;
   color: var(--bone);
@@ -879,6 +893,15 @@ section {
   text-transform: uppercase;
 }
 
+@media (max-width: 768px) {
+  .signature-bg-word {
+    font-size: 88px;
+    right: -8px;
+    top: -8px;
+    opacity: 0.32;
+  }
+}
+
 .signature-grid {
   position: relative;
   z-index: 1;
@@ -1131,6 +1154,15 @@ section {
   user-select: none;
   white-space: nowrap;
   text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .terrace-bg-word {
+    font-size: 88px;
+    left: -8px;
+    top: -8px;
+    opacity: 0.32;
+  }
 }
 
 .terrace-grid {
@@ -1520,6 +1552,19 @@ section {
   flex-wrap: wrap;
 }
 
+@media (max-width: 600px) {
+  .proof-badges {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .proof-badge { width: 100%; }
+  .proof-badge-icon { min-width: 80px; }
+}
+
 .proof-badge {
   display: flex;
   gap: var(--space-2);
@@ -1681,7 +1726,12 @@ section {
 }
 
 @media (max-width: 767px) {
-  .page-hero-bg-word { font-size: 84px; opacity: 0.35; }
+  .page-hero-bg-word {
+    font-size: 56px;
+    opacity: 0.28;
+    top: -4px;
+    padding-left: 16px;
+  }
 }
 
 /* === BOOK / RESERVEREN PAGE === */
