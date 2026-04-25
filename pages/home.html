@@ -51,8 +51,7 @@
 <!-- Preconnect + preload -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="../assets/images/tablegrill-steak-smoke-mobile.webp" media="(max-width: 768px)" fetchpriority="high">
-<link rel="preload" as="image" href="../assets/images/tablegrill-steak-smoke.webp" media="(min-width: 769px)" fetchpriority="high">
+<link rel="preload" as="image" href="../assets/images/tablegrill-steak-smoke.webp" fetchpriority="high">
 <link rel="preload" as="style" href="shared.css">
 
 <!-- Fonts: async-load to avoid render-blocking -->
@@ -285,37 +284,9 @@
 
 <!-- HERO -->
 <section class="hero">
-  <picture class="hero-poster">
-    <source media="(max-width: 768px)" srcset="../assets/images/tablegrill-steak-smoke-mobile.webp" width="600" height="800">
-    <source media="(min-width: 769px)" srcset="../assets/images/tablegrill-steak-smoke.webp" width="900" height="1200">
-    <img src="../assets/images/tablegrill-steak-smoke.webp" alt="Tafelgrill met Argentijnse steak en houtskool-rook" width="900" height="1200" fetchpriority="high" decoding="async">
-  </picture>
-  <video class="hero-video" autoplay muted loop playsinline preload="none" data-src="../assets/video/grill-loop.mp4" aria-hidden="true"></video>
-  <script>
-    /* Lazy-load hero video source after LCP is done, so the poster
-       image wins LCP. Video autoplays when buffered. */
-    (function () {
-      var v = document.querySelector('.hero-video');
-      if (!v || !v.dataset.src) return;
-      function attach() {
-        if (v.querySelector('source')) return;
-        var s = document.createElement('source');
-        s.src = v.dataset.src;
-        s.type = 'video/mp4';
-        v.appendChild(s);
-        v.load();
-        // Once video has enough data to play, mark hero so we can fade poster out
-        v.addEventListener('playing', function () {
-          v.classList.add('is-playing');
-        }, { once: true });
-      }
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(attach, { timeout: 2000 });
-      } else {
-        window.addEventListener('load', function () { setTimeout(attach, 400); });
-      }
-    })();
-  </script>
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="../assets/images/tablegrill-steak-smoke.webp" aria-hidden="true">
+    <source src="../assets/video/grill-loop.mp4" type="video/mp4">
+  </video>
   <div class="hero-content">
     <div class="hero-eyebrow">Argentijns aan de gracht · sinds 2011</div>
     <h1 class="hero-title">De parrilla<br class="br-mobile-only"> staat aan</h1>
