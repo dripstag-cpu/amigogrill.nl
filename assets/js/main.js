@@ -144,16 +144,22 @@
             '/menu/': '/en/menu/',
             '/ons-verhaal/': '/en/our-story/',
             '/terras/': '/en/terrace/',
+            '/bedrijfsuitjes/': '/en/business-events/',
             '/contact/': '/en/contact/',
-            '/reserveren/': '/en/book/'
+            '/reserveren/': '/en/book/',
+            '/privacy/': '/en/privacy/',
+            '/cookies/': '/en/cookies/'
         },
         'en-to-nl': {
             '/en/': '/',
             '/en/menu/': '/menu/',
             '/en/our-story/': '/ons-verhaal/',
             '/en/terrace/': '/terras/',
+            '/en/business-events/': '/bedrijfsuitjes/',
             '/en/contact/': '/contact/',
-            '/en/book/': '/reserveren/'
+            '/en/book/': '/reserveren/',
+            '/en/privacy/': '/privacy/',
+            '/en/cookies/': '/cookies/'
         }
     };
 
@@ -245,11 +251,15 @@
         if (dismissBtn) {
             dismissBtn.addEventListener('click', function () {
                 banner.classList.remove('is-visible');
+                body.classList.remove('has-lang-banner');
                 try { localStorage.setItem(STORAGE_KEY, lang); } catch (err) {}
             });
         }
 
-        window.setTimeout(function () { banner.classList.add('is-visible'); }, 400);
+        window.setTimeout(function () {
+            banner.classList.add('is-visible');
+            body.classList.add('has-lang-banner');
+        }, 400);
     }
 
     /* ----------------------------------------------------------------

@@ -2688,3 +2688,85 @@ section {
   .mobile-dock { background: rgba(14,11,9,0.98); }
   .menu-nav { background: rgba(14,11,9,0.96); }
 }
+
+/* ===========================================
+   Language Suggestion Banner
+   Shown once per visitor when browser-language differs from page-language.
+   Positioned above the fixed header; header shifts down when banner is visible.
+   =========================================== */
+.lang-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 110;
+  background: var(--ember-800);
+  border-bottom: 1px solid var(--smoke-700);
+  color: var(--bone);
+  padding: 12px 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  transform: translateY(-100%);
+  transition: transform 350ms var(--ease-out);
+  pointer-events: none;
+}
+.lang-banner.is-visible {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.lang-banner-text {
+  margin: 0;
+  color: var(--bone-dim);
+}
+.lang-banner-cta {
+  background: var(--ember);
+  color: var(--bone);
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  transition: background var(--dur-hover) var(--ease-out);
+}
+.lang-banner-cta:hover {
+  background: var(--ember-dark);
+  color: var(--bone);
+}
+.lang-banner-dismiss {
+  background: transparent;
+  border: none;
+  color: var(--pampas);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+  margin-left: 8px;
+  transition: color var(--dur-hover) var(--ease-out);
+}
+.lang-banner-dismiss:hover {
+  color: var(--bone);
+}
+body.has-lang-banner .site-header {
+  top: 52px;
+}
+body.has-lang-banner {
+  padding-top: 52px;
+}
+@media (max-width: 600px) {
+  .lang-banner {
+    padding: 10px 12px;
+    gap: 10px;
+    font-size: 13px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .lang-banner-text { flex: 1 1 100%; text-align: center; order: 1; }
+  .lang-banner-cta { order: 2; padding: 5px 12px; font-size: 12px; }
+  .lang-banner-dismiss { order: 3; margin-left: 0; }
+  body.has-lang-banner .site-header { top: 76px; }
+  body.has-lang-banner { padding-top: 76px; }
+}

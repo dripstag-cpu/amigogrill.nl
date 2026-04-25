@@ -1,57 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://amigogrill.nl/</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/"/>
+  </url>
+  <url>
+    <loc>https://amigogrill.nl/en/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/"/>
   </url>
   <url>
     <loc>https://amigogrill.nl/menu/</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/menu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/menu/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/menu/"/>
+  </url>
+  <url>
+    <loc>https://amigogrill.nl/en/menu/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/menu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/menu/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/menu/"/>
   </url>
   <url>
     <loc>https://amigogrill.nl/reserveren/</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/reserveren/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/book/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/reserveren/"/>
+  </url>
+  <url>
+    <loc>https://amigogrill.nl/en/book/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/reserveren/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/book/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/reserveren/"/>
   </url>
   <url>
     <loc>https://amigogrill.nl/ons-verhaal/</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/ons-verhaal/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/our-story/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/ons-verhaal/"/>
+  </url>
+  <url>
+    <loc>https://amigogrill.nl/en/our-story/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/ons-verhaal/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/our-story/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/ons-verhaal/"/>
   </url>
   <url>
     <loc>https://amigogrill.nl/terras/</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/terras/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/terrace/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/terras/"/>
+  </url>
+  <url>
+    <loc>https://amigogrill.nl/en/terrace/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/terras/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/terrace/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/terras/"/>
   </url>
   <url>
     <loc>https://amigogrill.nl/bedrijfsuitjes/</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/bedrijfsuitjes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/business-events/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/bedrijfsuitjes/"/>
+  </url>
+  <url>
+    <loc>https://amigogrill.nl/en/business-events/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/bedrijfsuitjes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/business-events/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/bedrijfsuitjes/"/>
   </url>
   <url>
     <loc>https://amigogrill.nl/contact/</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/contact/"/>
+  </url>
+  <url>
+    <loc>https://amigogrill.nl/en/contact/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/contact/"/>
   </url>
   <url>
     <loc>https://amigogrill.nl/privacy/</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/privacy/"/>
+  </url>
+  <url>
+    <loc>https://amigogrill.nl/en/privacy/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/privacy/"/>
   </url>
   <url>
     <loc>https://amigogrill.nl/cookies/</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-04-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/cookies/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/cookies/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/cookies/"/>
+  </url>
+  <url>
+    <loc>https://amigogrill.nl/en/cookies/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://amigogrill.nl/cookies/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amigogrill.nl/en/cookies/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://amigogrill.nl/cookies/"/>
   </url>
 </urlset>

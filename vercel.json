@@ -1,6 +1,6 @@
 {
-  "cleanUrls": false,
-  "trailingSlash": false,
+  "cleanUrls": true,
+  "trailingSlash": true,
   "headers": [
     {
       "source": "/assets/(.*)",
@@ -9,7 +9,7 @@
       ]
     },
     {
-      "source": "/pages/(.*\\.html)",
+      "source": "/(.*\\.html)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=300, must-revalidate" }
       ]
