@@ -895,10 +895,11 @@ section {
 
 @media (max-width: 768px) {
   .signature-bg-word {
-    font-size: 88px;
-    right: -8px;
-    top: -8px;
-    opacity: 0.32;
+    font-size: 56px;
+    right: auto;
+    left: 16px;
+    top: 16px;
+    opacity: 0.28;
   }
 }
 
@@ -1158,10 +1159,10 @@ section {
 
 @media (max-width: 768px) {
   .terrace-bg-word {
-    font-size: 88px;
-    left: -8px;
-    top: -8px;
-    opacity: 0.32;
+    font-size: 56px;
+    left: 16px;
+    top: 16px;
+    opacity: 0.28;
   }
 }
 
