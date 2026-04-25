@@ -37,3 +37,6 @@ research-prompt.md
 en-content.md
 nl-content.md
 content/
+
+# Local form preview files (design picks, not deployed)
+form-preview-*.html

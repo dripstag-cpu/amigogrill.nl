@@ -289,6 +289,181 @@
     }
 
     /* ----------------------------------------------------------------
+       7. Quote modal — multi-step inquiry form
+       Activates only on pages with [data-quote-trigger] buttons.
+       Used on bedrijfsuitjes / business-events pages.
+    ---------------------------------------------------------------- */
+    function initQuoteModal() {
+        var triggers = document.querySelectorAll('[data-quote-trigger]');
+        if (!triggers.length) { return; }
+
+        var modal = document.querySelector('.quote-modal');
+        if (!modal) { return; }
+
+        var form = modal.querySelector('form');
+        var stepLabel = modal.querySelector('.quote-modal-step-label');
+        var modalTitle = modal.querySelector('.quote-modal-title');
+        var backBtn = modal.querySelector('.quote-btn-back');
+        var nextBtn = modal.querySelector('.quote-btn-next');
+        var footer = modal.querySelector('.quote-modal-footer');
+        var closers = modal.querySelectorAll('[data-quote-close]');
+        var steps = modal.querySelectorAll('.quote-step');
+        var progressSegs = modal.querySelectorAll('.quote-progress-segment');
+        var current = 1;
+        var totalSteps = 3;
+
+        // Read titles from data attributes (per language)
+        var titles = {
+            1: modal.getAttribute('data-step-1-title') || '',
+            2: modal.getAttribute('data-step-2-title') || '',
+            3: modal.getAttribute('data-step-3-title') || ''
+        };
+        var stepLabelTpl = modal.getAttribute('data-step-label') || 'Step {n} of {total}';
+        var thanksLabel = modal.getAttribute('data-thanks-label') || 'Sent';
+        var nextLabel = modal.getAttribute('data-next-label') || 'Next →';
+        var submitLabel = modal.getAttribute('data-submit-label') || 'Send';
+        var mailtoSubject = modal.getAttribute('data-mailto-subject') || 'Inquiry';
+        var mailtoTo = modal.getAttribute('data-mailto-to') || '';
+        var mailtoLabels = {
+            event_type: modal.getAttribute('data-label-event-type') || 'Event type',
+            guests: modal.getAttribute('data-label-guests') || 'Number of guests',
+            date: modal.getAttribute('data-label-date') || 'Preferred date',
+            flexible: modal.getAttribute('data-label-flexible') || 'Date is flexible',
+            message: modal.getAttribute('data-label-message') || 'Special requests',
+            name: modal.getAttribute('data-label-name') || 'Name',
+            email: modal.getAttribute('data-label-email') || 'Email',
+            phone: modal.getAttribute('data-label-phone') || 'Phone',
+            company: modal.getAttribute('data-label-company') || 'Company'
+        };
+
+        function open() {
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            body.classList.add('modal-open');
+            setTimeout(focusFirstInput, 300);
+        }
+
+        function close() {
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+            body.classList.remove('modal-open');
+        }
+
+        function focusFirstInput() {
+            var first = modal.querySelector('.quote-step.is-active input, .quote-step.is-active select, .quote-step.is-active textarea');
+            if (first) first.focus();
+        }
+
+        function showStep(n) {
+            steps.forEach(function (s) { s.classList.remove('is-active'); });
+            var nextStep = modal.querySelector('[data-step="' + n + '"]');
+            if (nextStep) nextStep.classList.add('is-active');
+
+            progressSegs.forEach(function (seg, i) {
+                seg.classList.toggle('is-active', i + 1 <= (n === 'thanks' ? totalSteps : n));
+            });
+
+            if (n === 'thanks') {
+                stepLabel.textContent = thanksLabel;
+                modalTitle.textContent = '';
+                footer.style.display = 'none';
+            } else {
+                stepLabel.textContent = stepLabelTpl.replace('{n}', n).replace('{total}', totalSteps);
+                modalTitle.textContent = titles[n] || '';
+                footer.style.display = 'flex';
+                backBtn.classList.toggle('is-hidden', n === 1);
+                nextBtn.textContent = (n === totalSteps) ? submitLabel : nextLabel;
+            }
+
+            current = n;
+            modal.querySelectorAll('.quote-error').forEach(function (e) { e.classList.remove('is-visible'); });
+            setTimeout(function () { if (n !== 'thanks') focusFirstInput(); }, 100);
+        }
+
+        function validateStep(n) {
+            if (n === 1) {
+                var guests = form.querySelector('[name="guests"]').value.trim();
+                if (!guests || parseInt(guests, 10) < 1) {
+                    form.querySelector('[data-error-step="1"]').classList.add('is-visible');
+                    return false;
+                }
+            }
+            if (n === 3) {
+                var name = form.querySelector('[name="name"]').value.trim();
+                var email = form.querySelector('[name="email"]').value.trim();
+                var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!name || !email || !emailRe.test(email)) {
+                    form.querySelector('[data-error-step="3"]').classList.add('is-visible');
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function buildMailto() {
+            // Honeypot check — if filled, silently abort
+            var hp = form.querySelector('[name="_gotcha"]');
+            if (hp && hp.value) { return null; }
+
+            var data = new FormData(form);
+            var lines = [];
+
+            function addLine(key, label) {
+                var val = data.get(key);
+                if (val && String(val).trim()) {
+                    lines.push(label + ': ' + val);
+                }
+            }
+
+            addLine('name', mailtoLabels.name);
+            addLine('email', mailtoLabels.email);
+            addLine('phone', mailtoLabels.phone);
+            addLine('company', mailtoLabels.company);
+            lines.push('');
+            addLine('event_type', mailtoLabels.event_type);
+            addLine('guests', mailtoLabels.guests);
+            addLine('date', mailtoLabels.date);
+            if (data.get('flexible')) lines.push(mailtoLabels.flexible + ': ja / yes');
+            lines.push('');
+            addLine('message', mailtoLabels.message);
+
+            var body = lines.join('\n');
+            return 'mailto:' + mailtoTo +
+                '?subject=' + encodeURIComponent(mailtoSubject) +
+                '&body=' + encodeURIComponent(body);
+        }
+
+        triggers.forEach(function (t) {
+            t.addEventListener('click', function (e) {
+                e.preventDefault();
+                open();
+            });
+        });
+        closers.forEach(function (c) { c.addEventListener('click', close); });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
+        });
+
+        nextBtn.addEventListener('click', function () {
+            if (!validateStep(current)) return;
+            if (current === totalSteps) {
+                var mailto = buildMailto();
+                if (mailto) {
+                    window.location.href = mailto;
+                }
+                showStep('thanks');
+            } else {
+                showStep(current + 1);
+            }
+        });
+
+        backBtn.addEventListener('click', function () {
+            if (typeof current === 'number' && current > 1) showStep(current - 1);
+        });
+    }
+
+    /* ----------------------------------------------------------------
        Init
     ---------------------------------------------------------------- */
     function ready(fn) {
@@ -304,6 +479,7 @@
         initMobileDock();
         initFlagSwitcher();
         initLangBanner();
+        initQuoteModal();
         docEl.classList.remove('no-js');
         docEl.classList.add('js');
     });
