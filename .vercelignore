@@ -1,0 +1,15 @@
+# Don't deploy these to the website
+README.md
+*.md
+!index.html
+tools/
+node_modules/
+.claude/
+.git/
+research/
+content/
+research-prompt.md
+*-draft.md
+*-content.md
+package.json
+package-lock.json

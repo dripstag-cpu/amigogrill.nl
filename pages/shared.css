@@ -626,6 +626,12 @@ section {
   color: var(--ember);
 }
 
+.footer-socials svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
 /* --- Sticky mobile reserveer-bar (slide in after 80vh) --- */
 .mobile-reserve-bar {
   position: fixed;
