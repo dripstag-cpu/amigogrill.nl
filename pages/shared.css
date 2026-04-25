@@ -1561,7 +1561,9 @@ section {
 
 /* === SHARED PAGE HELPERS === */
 
-.eyebrow-leaf { color: var(--leaf); }
+/* Legacy .eyebrow-leaf kept for HTML compatibility — now ember to keep
+   all eyebrows visually consistent across the site. */
+.eyebrow-leaf { color: var(--ember); }
 
 .section-header {
   text-align: center;
@@ -1981,9 +1983,9 @@ section {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(107,142,78,0.15);
-  border: 1px solid var(--leaf);
-  color: var(--leaf);
+  background: rgba(198,71,26,0.12);
+  border: 1px solid var(--ember);
+  color: var(--ember);
   border-radius: 50%;
   font-size: 12px;
   margin-top: 2px;
@@ -2660,7 +2662,7 @@ section {
 }
 .story-pull-closing {
   margin-top: var(--space-7);
-  border-left-color: var(--leaf);
+  border-left-color: var(--ember);
 }
 
 @media (max-width: 768px) {
