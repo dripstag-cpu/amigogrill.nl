@@ -50,6 +50,7 @@
   --pampas: #B8A88A;
   --leather: #7A4A2C;
   --gold: #C89B5C;
+  --leaf: #6B8E4E;
   --ember: #C6471A;
   --ember-dark: #9F3A15;
 
@@ -118,17 +119,8 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--pampas);
 }
 
-/* Eyebrow color system:
- * .eyebrow-ember  → narrative & branding ("Van de kaart", "Wat onze gasten zeggen", "Veertien jaar aan de gracht")
- * .eyebrow-gold   → utility / operational info ("Openingstijden", "Tips", "Privé-zaal", "Goed om te weten")
- * Hero, signature, terrace section eyebrows stay ember as brand moments.
- */
 .eyebrow-ember {
   color: var(--ember);
-}
-
-.eyebrow-gold {
-  color: var(--gold);
 }
 
 h1, h2, h3, h4 {
@@ -1563,6 +1555,7 @@ section {
 
 /* === SHARED PAGE HELPERS === */
 
+.eyebrow-leaf { color: var(--leaf); }
 
 .section-header {
   text-align: center;
@@ -1982,9 +1975,9 @@ section {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(200,155,92,0.15);
-  border: 1px solid var(--gold);
-  color: var(--gold);
+  background: rgba(107,142,78,0.15);
+  border: 1px solid var(--leaf);
+  color: var(--leaf);
   border-radius: 50%;
   font-size: 12px;
   margin-top: 2px;
@@ -2661,7 +2654,7 @@ section {
 }
 .story-pull-closing {
   margin-top: var(--space-7);
-  border-left-color: var(--gold);
+  border-left-color: var(--leaf);
 }
 
 @media (max-width: 768px) {
